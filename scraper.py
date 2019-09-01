@@ -5,5 +5,6 @@ URL = "https://www.amazon.com/Enhanced-Splashproof-Portable-Bluetooth-Radiator/d
 headers = {"User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0'} #basically our browser info, my user agent on google should give me info for that
 page = requests.get(URL, headers=headers) #requests the page with the URL and header variable given at the top
 soup = BeautifulSoup(page.content, 'html.parser') #soup can give us the entire code from a website, just like view code source from f12
-print(soup.prettify()) #prints the entire code from a website
-
+#print(soup.prettify()) #prints the entire code from a website
+title = soup.find(id="productTitle")
+print(title)
