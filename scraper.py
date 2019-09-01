@@ -7,21 +7,18 @@ URL = "https://www.amazon.co.uk/Bluetooth-Anker-SoundCore-Portable-Playtime-Blac
 headers = {"User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0'}
 #requests the page with the URL and header variable given at the top
 page = requests.get(URL, headers=headers)
-# soup can give us the entire code from a website, just like view code source from f12
+#soup can give us the entire code from a website, just like view code source from f12
 soup = BeautifulSoup(page.content, 'html.parser')
 
 def check_price():
     #print(soup.prettify()) #prints the entire code from a website
-    # the title of the object i want to buy
-    title = soup.find(id="productTitle").get_text()
-    print(title.strip())  # i print the title
-    # the price of the object i want to buy
-    price = soup.find(id="priceblock_ourprice").get_text()
-    # i am taking the first 3 digits of a price, and i convert it to a float. It was string by default
-    convertPrice = float(price[0:3])
-    print(convertPrice)  # i print the price, strip() kills the extra spaces
+    title = soup.find(id="productTitle").get_text() #the title of the object i want to buy
+    price = soup.find(id="priceblock_ourprice").get_text() #the price of the object i want to buy
+    print(title.strip())  #i print the title
+    convertPrice = float(price[0:3]) # iam taking the first 3 digits of a price, and i convert it to a float. It was string by default
+    print(convertPrice)  #i print the price, strip() kills the extra spaces
     if(convertPrice < 200):
-     send_mail()
+        send_mail()
 
 def send_mail():
     server = smtplib.SMTP('smtp.gmail.com', 587)
@@ -34,8 +31,11 @@ def send_mail():
     msg = f"Subject: {subject}\n\n{body}"
     server.sendmail
     (
-        'username@gmail.com',
-        'anothermail@gmail.com', 
+        'username@gmail.com', #username of the email that we use to sent the alert
+        'anothermail@gmail.com', #email reciever
         msg
     )
-    print('Action Completed')
+    print('Action Completed') #just a random message that tells us if this worked
+    server.quit() #quits from the server
+
+check_price()
