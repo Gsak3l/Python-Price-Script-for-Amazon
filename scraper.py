@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import smtplib
+import time
 #URL is basically our amazon item
 URL = "https://www.amazon.co.uk/Bluetooth-Anker-SoundCore-Portable-Playtime-Black/dp/B01HTH3C8S/ref=sr_1_3?keywords=bluetooth+speaker&qid=1567340467&s=gateway&sr=8-3"
 #basically our browser info, my user agent on google should give me info for that
@@ -38,4 +39,6 @@ def send_mail():
     print('Action Completed') #just a random message that tells us if this worked
     server.quit() #quits from the server
 
-check_price()
+while(True): #this basically runs once, and then pauses the execution for 1 hour 60*60 = 1 hour minutes * seconds
+        check_price()
+        time.sleep(60*60)
