@@ -42,3 +42,5 @@ def send_mail():
 while(True): #this basically runs once, and then pauses the execution for 1 hour 60*60 = 1 hour minutes * seconds
         check_price()
         time.sleep(60*60)
+
+#this project is over
